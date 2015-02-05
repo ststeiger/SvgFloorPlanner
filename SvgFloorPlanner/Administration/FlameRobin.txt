@@ -1,0 +1,37 @@
+﻿
+http://www.flamerobin.org/dokuwiki/wiki/manual
+
+
+
+Here are the files used by FlameRobin to store configuration information:
+
+fr_databases.conf 
+is the list of Firebird servers and databases you work with; 
+FlameRobin will create an empty one (with only the “localhost” predefined server) 
+when you run it for the first time; 
+then you can register new servers and databases.
+
+
+%userprofile%\AppData\Local\flamerobin
+C:\Users\<USERNAME>\AppData\Local\flamerobin
+
+
+
+fr_settings.conf 
+stores FlameRobin's configuration information, like the position 
+and size of the main program window. 
+You don't need to - and are encouraged not to - edit it by hand.
+
+sys-templates 
+(folder) stores code templates used internally by FlameRobin, 
+which can be overridden by the user (this is an advanced topic - see below).
+
+code-templates 
+(folder) stores code templates that the user can run by means of the Generate code menu 
+(this is an advanced topic - see below).
+
+history stores 
+(folder) the history of executed SQL statements.
+
+
+

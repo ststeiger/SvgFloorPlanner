@@ -55,6 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administration\FlameRobin.exe" />
+    <Content Include="Administration\FlameRobin.txt" />
+    <Content Include="Administration\Guide\FLRGuide.htm" />
+    <Content Include="Administration\Guide\images\image00.png" />
+    <Content Include="Administration\Guide\images\image01.png" />
     <Content Include="plans\065-01.svg" />
     <Content Include="plans\070-0B.svg" />
     <Content Include="Default.aspx" />
