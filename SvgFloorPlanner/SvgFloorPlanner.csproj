@@ -59,6 +59,8 @@
     <Content Include="Administration\Guide\FLRGuide.htm" />
     <Content Include="Administration\Guide\images\image00.png" />
     <Content Include="Administration\Guide\images\image01.png" />
+    <Content Include="AppCode\Create_Insert_T_SYS_Ref_MimeTypes_Firebird.sql" />
+    <Content Include="AppCode\Create_Insert_T_SYS_Ref_MimeTypes.sql" />
     <Content Include="plans\065-01.svg" />
     <Content Include="plans\070-0B.svg" />
     <Content Include="Default.aspx" />
