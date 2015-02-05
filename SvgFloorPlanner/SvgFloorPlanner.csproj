@@ -54,11 +54,11 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="065-01.svg" />
-    <Content Include="070-0B.svg" />
+    <Content Include="plans\065-01.svg" />
+    <Content Include="plans\070-0B.svg" />
     <Content Include="Default.aspx" />
     <Content Include="drag.html" />
-    <Content Include="dragtest2.svg" />
+    <Content Include="images\dragtest2.svg" />
     <Content Include="Global.asax" />
     <Content Include="info.txt" />
     <Content Include="Libs\Firebird-2.5.3.26780-0_Win32_embed\doc\README_embedded.txt" />
@@ -152,7 +152,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Libs\FirebirdSql.Data.FirebirdClient.dll" />
-    <Content Include="moddrag.svg" />
+    <Content Include="images\moddrag.svg" />
     <Content Include="Scripts\d3\d3.js" />
     <Content Include="Scripts\d3\d3.min.js" />
     <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -167,9 +167,9 @@
     <Content Include="Scripts\leaflet\dist\leaflet-src.js" />
     <Content Include="Scripts\leaflet\dist\leaflet.css" />
     <Content Include="Scripts\leaflet\dist\leaflet.js" />
-    <Content Include="setup.sql" />
-    <Content Include="SVG_Chair.svg" />
-    <Content Include="SVG_Stuhl.svg" />
+    <Content Include="AppCode\setup.sql" />
+    <Content Include="furniture\SVG_Chair.svg" />
+    <Content Include="furniture\SVG_Stuhl.svg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +183,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="NativeMethods.cs" />
+    <Compile Include="AppCode\NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQL.cs" />
+    <Compile Include="AppCode\SQL.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -227,8 +227,8 @@
     </Content>
     <Content Include="App_Data\MyDB.fdb" />
     <Content Include="Scripts\d3\LICENSE" />
-    <Content Include="065-01.pdf" />
-    <Content Include="070-0B.pdf" />
+    <Content Include="plans\065-01.pdf" />
+    <Content Include="plans\070-0B.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

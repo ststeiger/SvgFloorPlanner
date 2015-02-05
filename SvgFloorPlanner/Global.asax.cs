@@ -1,11 +1,15 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 
+
 namespace SvgFloorPlanner
 {
+
+
     public class Global : System.Web.HttpApplication
     {
 
@@ -43,5 +47,9 @@ namespace SvgFloorPlanner
         {
 
         }
+
+
     }
+
+
 }
