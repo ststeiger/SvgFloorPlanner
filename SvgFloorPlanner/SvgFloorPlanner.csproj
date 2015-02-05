@@ -54,6 +54,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\FlameRobin.exe" />
     <Content Include="plans\065-01.svg" />
     <Content Include="plans\070-0B.svg" />
     <Content Include="Default.aspx" />
@@ -229,6 +230,7 @@
     <Content Include="Scripts\d3\LICENSE" />
     <Content Include="plans\065-01.pdf" />
     <Content Include="plans\070-0B.pdf" />
+    <Content Include="Administration\Flamerobin as a GUI for embedded Firebird.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

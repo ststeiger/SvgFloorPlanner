@@ -42,7 +42,7 @@
             text-align: left;
             padding-left: 0.25cm;
             padding-right: 0.25cm;
-            text-shadow: #6374AB 3px -3px 2px;
+            text-shadow: #BCBCBC 2px 2px 2px;
         }
         
         
