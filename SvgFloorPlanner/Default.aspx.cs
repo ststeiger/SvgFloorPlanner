@@ -1,10 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using FirebirdSql.Data.FirebirdClient;
 
 
 namespace SvgFloorPlanner
@@ -14,46 +13,40 @@ namespace SvgFloorPlanner
     public partial class _Default : System.Web.UI.Page
     {
 
-        public class SQL
-        {
-
-
-            public static string GetConnectionString()
-            {
-                FirebirdSql.Data.FirebirdClient.FbConnectionStringBuilder csb = new FbConnectionStringBuilder();
-
-                csb.ServerType = FbServerType.Embedded;
-                csb.UserID = "sysdba";
-                csb.Password = "masterkey";
-                csb.Dialect = 3;
-                csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
-
-                // string connectionString = "ServerType=1;User=SYSDBA;Password=masterkey;Dialect=3;Database="
-                // + System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
-
-                return csb.ConnectionString;
-            }
-
-
-        }
-
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            System.Data.DataTable dt = new System.Data.DataTable();
+            int iCount= System.Convert.ToInt32(SQL.ExecuteScalar("SELECT COUNT(*) FROM Table1 WHERE ID = 3"));
 
-            FbDataAdapter da = new FbDataAdapter("SELECT * FROM Table1", connectionString);
-            da.Fill(dt);
+            if (iCount == 0)
+            {
+                // SQL.ExecuteNonQuery("DELETE FROM Table1 WHERE ID = 3");
 
-            // ID
-            // FIRSTNAME
-            // LASTNAME
+                string strSQL = @"
+INSERT INTO Table1
+(
+	 ID
+	,FIRSTNAME
+	,LASTNAME
+)
+VALUES
+(
+	 3-- ID, integer
+	,'Test' -- FIRSTNAME, nvarchar(200)
+	,'User' -- LASTNAME, nvarchar(128)
+)
+;
+";
+                SQL.ExecuteNonQuery(strSQL);
+            } // End if
 
-            
-
+            System.Data.DataTable dt = SQL.GetDataTable("SELECT * FROM Table1");
             this.dgvData.DataSource = dt;
             this.dgvData.DataBind();
-        }
-    }
-}
+        } // End Sub Page_Load 
+
+
+    } // End Class Default 
+
+
+} // End Namespace 
