@@ -8,8 +8,9 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    version="1.1"
-   width="2698.2749"
-   height="3950.925"
+   width="2698"
+   height="3950" 
+   viewBox="0 0 2698 3950" 
    id="svg2">
   <defs
      id="defs4">
