@@ -1,0 +1,186 @@
+﻿<!doctype html>
+<html>
+<head>
+    <base href="/" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>OpenFloorPlan Viewer</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <style type="text/css">
+ 
+    </style>
+
+    <script type="text/javascript">
+        var svgNS = "http://www.w3.org/2000/svg";
+
+        // http://stackoverflow.com/questions/2557247/easiest-way-to-retrieve-cross-browser-xmlhttprequest
+        function createXMLHTTPObject()
+        {
+            var XMLHttpFactories = [
+                  function () { return new XMLHttpRequest() }
+                , function () { return new ActiveXObject("Msxml2.XMLHTTP") }
+                , function () { return new ActiveXObject("Msxml3.XMLHTTP") }
+                , function () { return new ActiveXObject("Microsoft.XMLHTTP") }
+            ];
+
+            var xmlhttp = false;
+            for (var i = 0; i < XMLHttpFactories.length; i++)
+            {
+                try
+                {
+                    xmlhttp = XMLHttpFactories[i]();
+                }
+                catch (e)
+                {
+                    continue;
+                }
+                break;
+            }
+            return xmlhttp;
+        }
+
+
+        // http://www.hunlock.com/blogs/Snippets:_Synchronous_AJAX
+        function getFile(url)
+        {
+            var AJAX = createXMLHTTPObject();
+
+            if (AJAX)
+            {
+                AJAX.open("GET", url, false);
+                AJAX.send(null);
+
+                //return AJAX.responseText;
+                return AJAX.responseXML.documentElement;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+
+        function notify(text)
+        {
+            alert(text);
+        }
+
+
+        function createCircle()
+        {
+
+            var objTag = document.getElementById("myObjTag")
+            var svgdoc = objTag.getSVGDocument();
+            // console.log(SD);
+            var svgwin = null;
+            // view-source:https://jwatt.org/svg/demos/scripting-across-embed.html
+            if (svgdoc && svgdoc.defaultView)  // try the W3C standard way first
+                svgwin = svgdoc.defaultView;
+            else if (objTag.window)
+                svgwin = objTag.window;
+            else
+            {
+                try
+                {
+                    svgwin = objTag.getWindow();
+                }
+                catch (exception)
+                {
+                    alert('The DocumentView interface is not supported\r\n' +
+                          'Non-W3C methods of obtaining "window" also failed');
+                }
+            }
+
+
+            // Call function in svg
+            // svgwin.lol();
+
+
+            // -----------------------------------------------------------------------------------------------------------
+            var newid = "Circle_" + (new Date()).getTime();
+
+            // http://stackoverflow.com/questions/20539196/creating-svg-elements-dynamically-with-javascript-inside-html
+            // http://stackoverflow.com/questions/16488884/add-svg-element-to-existing-svg-using-dom
+            // http://benfrain.com/selecting-svg-inside-tags-with-javascript/
+            var myCircle = svgdoc.createElementNS(svgNS, "circle"); //to create a circle. for rectangle use "rectangle"
+            myCircle.setAttributeNS(null, "id", newid);
+            myCircle.setAttributeNS(null, "cx", 100);
+            myCircle.setAttributeNS(null, "cy", 100);
+            myCircle.setAttributeNS(null, "r", 50);
+            myCircle.setAttributeNS(null, "fill", "black");
+            myCircle.setAttributeNS(null, "stroke", "none");
+
+            myCircle.setAttributeNS(null, "dragx", 400);
+            myCircle.setAttributeNS(null, "dragy", 300);
+            myCircle.setAttributeNS(null, "transform", "translate(400,300)");
+
+            
+            svgdoc.documentElement.appendChild(myCircle);
+            svgwin.initElement(newid);
+            // -----------------------------------------------------------------------------------------------------------
+
+            
+            var myChair = svgdoc.createElementNS(svgNS, "g"); //to create a circle. for rectangle use "rectangle"
+            
+            var svg = getFile('/furniture/SVG_CHair.svg');
+            // myChair.innerHTML = svg.innerHTML;
+            
+            svg = svgdoc.importNode(svg, true); // surprisingly optional in these browsers
+            // svgdoc.documentElement.appendChild(svg);
+            myChair.appendChild(svg);
+
+
+            myChair.setAttributeNS(null, "id", "testg");
+            myChair.setAttributeNS(null, "cx", 100);
+            myChair.setAttributeNS(null, "cy", 100);
+            myChair.setAttributeNS(null, "r", 50);
+            myChair.setAttributeNS(null, "fill", "black");
+            myChair.setAttributeNS(null, "stroke", "none");
+
+            myChair.setAttributeNS(null, "dragx", 400);
+            myChair.setAttributeNS(null, "dragy", 300);
+            myChair.setAttributeNS(null, "transform", "translate(400,300)");
+
+            
+            svgdoc.documentElement.appendChild(myChair);
+            svgwin.initElement("testg");
+            
+
+            // -----------------------------------------------------------------------------------------------------------
+
+            /*
+
+            // http://stackoverflow.com/questions/7981100/how-do-i-dynamically-insert-an-svg-image-into-html
+            var svg = getFile('/furniture/SVG_CHair.svg');
+            alert(svg);
+
+            svg.setAttributeNS(null, "id", "foobar");
+            svg.setAttributeNS(null, "dragx", 400);
+            svg.setAttributeNS(null, "dragy", 300);
+            svg.setAttributeNS(null, "transform", "translate(400,300)");
+
+            svg = svgdoc.importNode(svg, true); // surprisingly optional in these browsers
+            svgdoc.documentElement.appendChild(svg);
+            svgwin.initElement("foobar");
+            */
+
+        }
+
+    </script>
+
+</head>
+<body>
+
+    <input type="button" value="Add circle" onclick="createCircle(); return false;" />
+    <br />
+
+    <!-- ID is in SVG itselfs -->
+    <object id="myObjTag" data="images/Zimmertyp1.svg" type="image/svg+xml" width="500" height="1000">
+        <img alt="Testing drag in SVG" src="yourfallback.jpg" />
+    </object>
+
+</body>
+</html>

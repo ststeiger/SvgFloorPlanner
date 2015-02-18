@@ -22,6 +22,7 @@
             border-collapse: collapse;
         }
         
+
         #dgvData td
         {
             border: 1px solid black;
@@ -53,10 +54,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="padding-left: 0.25cm; padding-right: 0.25cm;">
-        <h4 style="text-transform: uppercase;">Testing the embedded Firebird database engine</h4>
-        <asp:GridView ID="dgvData" runat="server"></asp:GridView>
-    </div>
+        <div style="padding-left: 0.25cm; padding-right: 0.25cm;">
+            <h4 style="text-transform: uppercase;">Testing the embedded Firebird database engine</h4>
+            <asp:GridView ID="dgvData" runat="server"></asp:GridView>
+        </div>
     </form>
 </body>
 </html>
