@@ -7,3 +7,25 @@ http://www.petercollingridge.co.uk/interactive-svg-components/draggable-svg-elem
 
 http://www.physics.ohio-state.edu/fac_engr/flr_plans.html
 
+
+Reorder Elements:
+
+http://stackoverflow.com/questions/4341875/getting-the-first-element-from-body-then-insertbefore
+Getting the first element from <body> then insertBefore()
+
+var addedElement = document.createElement('p');
+addedElement.appendChild(document.createTextNode('Hello, world!'));
+
+var body = document.body;
+body.insertBefore(addedElement, body.firstChild);
+
+It's likely that you are overlooking the fact that insertBefore 
+is a method of the parent element, and it takes the new element before the existing one. 
+
+
+
+document.body.firstChild
+document.body.lastElementChild
+
+document.body.firstElementChild
+document.body.lastElementChild
