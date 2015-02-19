@@ -5,6 +5,25 @@ using System.Web;
 namespace SvgFloorPlanner
 {
 
+
+    public static class ext2
+    {
+
+
+        public static System.Data.IDbCommand AddParameter(this System.Data.IDbCommand cmd, string name, object value)
+        {
+            var p = cmd.CreateParameter();
+            p.ParameterName= name;
+            p.Value= value;
+            cmd.Parameters.Add(p);
+
+            return cmd;
+        }
+
+
+    }
+
+
 	// http://stackoverflow.com/questions/23785317/mime-types-for-xsp-mono-webserver
 	public class SvgHandler : IHttpHandler
 	{
@@ -12,6 +31,17 @@ namespace SvgFloorPlanner
 
 		public SvgHandler()
 		{ }
+
+
+        public class TestInterfaceExtension
+        {
+            public void TestMethod()
+            {
+                System.Data.IDbCommand cmd = null;
+                cmd.AddParameter("testp", "testValue")
+                    .AddParameter("abc", "def");
+            }
+        }
 
 
 		public void ProcessRequest(HttpContext context)

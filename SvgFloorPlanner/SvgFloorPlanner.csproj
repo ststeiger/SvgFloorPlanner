@@ -185,6 +185,7 @@
     <Content Include="yourfallback.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ajax\omg.cs" />
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
