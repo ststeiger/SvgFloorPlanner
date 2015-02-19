@@ -245,6 +245,7 @@
     <Content Include="Administration\Flamerobin as a GUI for embedded Firebird.docx" />
     <Content Include="svg\Zimmertyp_1_.pdf" />
     <Content Include="svg\Zimmertyp_2_.pdf" />
+    <Content Include="connections.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -289,7 +290,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="ajax\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
