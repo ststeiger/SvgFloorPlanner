@@ -17,6 +17,10 @@ namespace SvgFloorPlanner
             csb.ServerType = FbServerType.Embedded;
             csb.UserID = "sysdba";
             csb.Password = "masterkey";
+
+			if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+				csb.Password = "anothermasterkey";
+
             csb.Dialect = 3;
             csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
 
