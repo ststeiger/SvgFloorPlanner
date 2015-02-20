@@ -68,7 +68,23 @@
         nMouseOffsetX = 0;
         nMouseOffsetY = 0;
     }
-    
+
+
+
+function getRotateText(str)
+{
+    if(str === null)
+    return "";
+
+var FN_ARGS = /(rotate\s*\(\s*[^\)]*\))/m;
+argDecl = str.match(FN_ARGS);
+if(argDecl === null)
+return "";
+
+return " " + argDecl[0] + " ";
+}
+
+
     function mouseMove(evt) 
     { 
         var p = document.documentElement.createSVGPoint();
@@ -85,11 +101,12 @@
         {
             draggingElement.setAttribute("dragx", p.x);
             draggingElement.setAttribute("dragy", p.y);
-            draggingElement.setAttribute("transform", "translate(" + p.x + "," + p.y + ")");
+            var rot = getRotateText(draggingElement.getAttribute("transform"));
+            draggingElement.setAttribute("transform", "translate(" + p.x + "," + p.y + ")" + rot);
         }
         
         displayCoords(p.x, p.y, "(svg user)");
-//        displayRawText("mouse offset=" + nMouseOffsetX + "," + nMouseOffsetY);
+//      displayRawText("mouse offset=" + nMouseOffsetX + "," + nMouseOffsetY);
     }
     
     function displayCoords(x,y,extra) 
@@ -149,6 +166,8 @@
         
     el.addEventListener('contextmenu', function(evt) 
     {
+    	console.log("contextmenu");
+
       evt.preventDefault();
       // element.ownerDocument
       //console.log(evt.target);

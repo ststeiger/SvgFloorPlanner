@@ -19,15 +19,22 @@ namespace SvgFloorPlanner
             csb.Password = "masterkey";
 
 			if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
-				csb.Password = "anothermasterkey";
+				csb.Password = "someuser";
 
             csb.Dialect = 3;
-            csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
+			// csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
+			csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/FloorPlanner.fdb");
 
             // string connectionString = "ServerType=1;User=SYSDBA;Password=masterkey;Dialect=3;Database="
             // + System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
 
-            return csb.ConnectionString;
+			string cs = csb.ConnectionString;
+
+			// http://stackoverflow.com/questions/4862392/firebird-2-5-reports-is-not-a-valid-database-although-it-is
+			// cs += ";fix_fss_data=WIN1251; fix_fss_metadata=WIN1251;";
+			// cs += ";FIX_FSS_METADATA=utf8";
+
+			return cs;
         } // End Function GetConnectionString
 
 

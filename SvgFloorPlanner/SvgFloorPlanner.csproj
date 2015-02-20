@@ -44,7 +44,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Mobile" />
     <Reference Include="FirebirdSql.Data.FirebirdClient">
       <HintPath>Libs\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
@@ -256,6 +255,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <None Include="App_Data\FloorPlanner.fdb" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
