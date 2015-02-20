@@ -55,6 +55,7 @@
     <Content Include="Administration\Guide\FLRGuide.htm" />
     <Content Include="Administration\Guide\images\image00.png" />
     <Content Include="Administration\Guide\images\image01.png" />
+    <Content Include="AppCode\Check_Valid_Filename_Constraint.sql" />
     <Content Include="AppCode\Create_Insert_T_SYS_Ref_MimeTypes_Firebird.sql" />
     <Content Include="AppCode\Create_Insert_T_SYS_Ref_MimeTypes.sql" />
     <Content Include="drag2.html" />
@@ -181,7 +182,9 @@
     <Content Include="svg\Zimmertype2.svg" />
     <Content Include="svg\Zimmertyp_1_.dwg" />
     <Content Include="svg\Zimmertyp_2_.dwg" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="yourfallback.jpg" />
   </ItemGroup>
   <ItemGroup>

@@ -99,7 +99,7 @@
             // Call function in svg
             // svgwin.lol();
 
-
+            /*
             // -----------------------------------------------------------------------------------------------------------
             var newid = "Circle_" + (new Date()).getTime();
 
@@ -122,7 +122,7 @@
             svgdoc.documentElement.appendChild(myCircle);
             svgwin.initElement(newid);
             // -----------------------------------------------------------------------------------------------------------
-
+            */
             
             var myChair = svgdoc.createElementNS(svgNS, "g"); //to create a circle. for rectangle use "rectangle"
             
@@ -134,20 +134,32 @@
             myChair.appendChild(svg);
 
 
-            myChair.setAttributeNS(null, "id", "testg");
-            myChair.setAttributeNS(null, "cx", 100);
-            myChair.setAttributeNS(null, "cy", 100);
-            myChair.setAttributeNS(null, "r", 50);
+            var chairid = "Chair_" + (new Date()).getTime();
+
+            myChair.setAttributeNS(null, "id", chairid);
+            // myChair.setAttributeNS(null, "cx", 100);
+            // myChair.setAttributeNS(null, "cy", 100);
+            // myChair.setAttributeNS(null, "r", 50);
+
+
+            myChair.setAttributeNS(null, "width", 20);
+            myChair.setAttributeNS(null, "height", 20);
+
             myChair.setAttributeNS(null, "fill", "black");
-            myChair.setAttributeNS(null, "stroke", "none");
+            //myChair.setAttributeNS(null, "stroke", "none");
+            myChair.setAttributeNS(null, "stroke", "#FF00FF");
+            myChair.setAttributeNS(null, "stroke-width", "10");
+            // myChair.setAttributeNS(null, "filter", "url(#biggerbwcopy)"); // style.filter = "url(#biggerbwcopy)";
+
 
             myChair.setAttributeNS(null, "dragx", 400);
             myChair.setAttributeNS(null, "dragy", 300);
-            myChair.setAttributeNS(null, "transform", "translate(400,300)");
-
+            // myChair.setAttributeNS(null, "transform", "translate(400,300)");
+            // myChair.setAttributeNS(null, "transform", "rotate(60 50 50)");
+            
             
             svgdoc.documentElement.appendChild(myChair);
-            svgwin.initElement("testg");
+            svgwin.initElement(chairid);
             
 
             // -----------------------------------------------------------------------------------------------------------
@@ -175,7 +187,7 @@
 </head>
 <body>
 
-    <input type="button" value="Add circle" onclick="createCircle(); return false;" />
+    <input type="button" value="Add chair" onclick="createCircle(); return false;" />
     <br />
 
     <!-- ID is in SVG itselfs -->

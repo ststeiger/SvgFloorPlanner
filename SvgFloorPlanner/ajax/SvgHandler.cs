@@ -10,6 +10,7 @@ namespace SvgFloorPlanner
     {
 
 
+
         public static System.Data.IDbCommand AddParameter(this System.Data.IDbCommand cmd, string name, object value)
         {
             var p = cmd.CreateParameter();

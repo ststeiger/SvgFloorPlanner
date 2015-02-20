@@ -112,12 +112,140 @@
         }
     }
     
+    
+    
+    function findFirstGroupParent(el)
+    {
+      if(el == null)
+        return null;
+        
+        /*
+        while(el.tagName !== "svg")
+        {
+          // console.log(el);
+          if(el == null)
+            break;
+          
+          el = el.parentElement;
+        }
+        */
+        
+        el = el.ownerSVGElement;
+        
+        // if(el != null) return el.parentElement;
+        if(el != null) return el.parentNode;
+        
+        return null;
+    }
+    
+    
     function initElement(ele) {
       var el = document.getElementById(ele);
       if(el)
         el.addEventListener("mousedown", mouseDown, false);
       else
         alert("initElement: NULL");
+        
+        
+    el.addEventListener('contextmenu', function(evt) 
+    {
+      // evt.preventDefault();
+      // element.ownerDocument
+      //console.log(evt.target);
+      // console.log(evt.target.ownerDocument); // HTML, not SVG
+      // var d = p.ownerDocument; 
+      // var html = d.documentElement;
+      // console.log(evt.target.ownerDocument.defaultView); // no document.parent
+      // console.log(evt.target.ownerDocument.defaultView.parent.document);
+      // console.log(evt.target.ownerDocument.documentElement.innerHTML);
+      
+      //var el = findFirstGroupParent(evt.target);
+      var el = evt.target.ownerSVGElement;
+      if(el != null) el = el.parentNode;
+      
+        
+      
+      
+      console.log(el);
+  
+  
+      // var svg = el.parentElement; //document.querySelector('svg');
+      var svg = el.ownerSVGElement; //document.querySelector('svg');
+      
+      /*
+      // http://stackoverflow.com/questions/4850821/svg-coordinates-with-transform-matrix
+      // http://stackoverflow.com/questions/10298658/mouse-position-inside-autoscaled-svg
+      
+
+      // Create an SVGPoint for future math
+      var pt = svg.createSVGPoint();
+
+      // Get point in global SVG space
+      function cursorPoint(evt){
+        pt.x = evt.clientX; pt.y = evt.clientY;
+        return pt.matrixTransform(svg.getScreenCTM().inverse());
+      }
+      
+      var cp = cursorPoint(evt);
+      console.log(cp);
+      */
+      
+      var pt = svg.createSVGPoint();
+      pt.x = evt.clientX;
+      pt.y = evt.clientY;
+      var globalPoint = pt.matrixTransform(svg.getScreenCTM().inverse());
+     
+     
+      var globalToLocal = el.getTransformToElement(svg).inverse();
+      var inObjectSpace = globalPoint.matrixTransform( globalToLocal );
+     
+     
+     
+     
+     
+    
+    if(el != null)
+    {
+      var tra = el.getAttribute("transform");
+      if(tra === null)
+        tra="";
+      console.log(tra);
+    
+      el.setAttributeNS(null, "transform", tra + " rotate(45 " + inObjectSpace.x + " " + inObjectSpace.y + ")");
+    
+        // el.setAttributeNS(null, "transform", "rotate(60 " + cp.x + " " + cp.y + ")");
+        //el.setAttributeNS(null, "transform", "rotate(60 " + evt.x + " " + evt.clientY + ")");
+        // el.setAttributeNS(null, "transform", "rotate(60 " + globalPoint.x + " " + globalPoint.y + ")");
+        // draggingElement.setAttribute("transform", "translate(" + p.x + "," + p.y + ")");    
+    }
+
+
+
+
+
+/*
+      
+      
+      
+
+        
+        
+        // displayCoords(p.x, p.y, "(svg user)");
+      */
+      
+      
+      
+      
+      
+      
+      return false;
+      
+      
+      
+      // myChair.setAttributeNS(null, "transform", "rotate(60 50 50)");
+      
+    }, false);
+        
     }
     
     
@@ -333,6 +461,18 @@
          d="m 161,0 19269,0 0,27243 -19269,0 L 161,0"
          id="path3003" />
     </clipPath>
+
+    <!--
+    http://stackoverflow.com/questions/9391945/outline-a-group-of-touching-shapes-with-svg
+    -->
+    <filter id="biggerbwcopy">
+      <feColorMatrix values="0 0 0 0 0
+                             0 0 0 0 0
+                             0 0 0 0 0
+                             0 0 0 1 0"/>
+      <feMorphology operator="dilate" radius="2"/>
+    </filter>
+
   </defs>
   <metadata
      id="metadata7">
@@ -348,7 +488,7 @@
   </metadata>
 
 
-  <circle id="ball" fill="green" r="200" transform="translate(400,300)" dragx="400" dragy="300"/>
+  <circle cx="500" id="ball" fill="green" r="200" transform="translate(400,300)" dragx="400" dragy="300"/>
 
   <g id="square" transform="translate(1000,1000)" dragx="1000" dragy="1000">
     <rect x="0" y="0" width="300" height="300" fill="red" stroke="black" stroke-width="10" />

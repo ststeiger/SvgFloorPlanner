@@ -29,3 +29,17 @@ document.body.lastElementChild
 
 document.body.firstElementChild
 document.body.lastElementChild
+
+
+http://www.petercollingridge.co.uk/blog/svg-animation-rotating-elements
+
+
+http://sarasoueidan.com/blog/svg-transformations/
+
+
+http://tutorials.jenkov.com/svg/svg-transformation.html
+
+
+
+
+
