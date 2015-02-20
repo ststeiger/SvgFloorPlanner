@@ -22,8 +22,8 @@ namespace SvgFloorPlanner
 				csb.Password = "someuser";
 
             csb.Dialect = 3;
-			// csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
-			csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/FloorPlanner.fdb");
+            // csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");
+            csb.Database = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/FloorPlanner.fdb");
 
             // string connectionString = "ServerType=1;User=SYSDBA;Password=masterkey;Dialect=3;Database="
             // + System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/MyDB.fdb");

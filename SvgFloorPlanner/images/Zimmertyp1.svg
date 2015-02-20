@@ -68,23 +68,25 @@
         nMouseOffsetX = 0;
         nMouseOffsetY = 0;
     }
-
-
-
-function getRotateText(str)
-{
-    if(str === null)
-    return "";
-
-var FN_ARGS = /(rotate\s*\(\s*[^\)]*\))/m;
-argDecl = str.match(FN_ARGS);
-if(argDecl === null)
-return "";
-
-return " " + argDecl[0] + " ";
-}
-
-
+    
+    
+    function getRotateText(str)
+    {
+      if(str === null)
+        return "";
+      
+      //var FN_ARGS = /(rotate\s*\(\s*[^\)]*\))/m;
+      var FN_ARGS = /(rotate\s*\(\s*[^\)]*\))/g;
+      argDecl = str.match(FN_ARGS);
+      if(argDecl === null)
+      return "";
+      
+      // console.log(argDecl);
+      // return " " + argDecl[0] + " ";
+      return " " + argDecl.join(" ") + " ";
+    }
+    
+    
     function mouseMove(evt) 
     { 
         var p = document.documentElement.createSVGPoint();
