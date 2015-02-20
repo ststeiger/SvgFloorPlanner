@@ -149,7 +149,7 @@
         
     el.addEventListener('contextmenu', function(evt) 
     {
-      // evt.preventDefault();
+      evt.preventDefault();
       // element.ownerDocument
       //console.log(evt.target);
       // console.log(evt.target.ownerDocument); // HTML, not SVG
@@ -161,12 +161,20 @@
       
       //var el = findFirstGroupParent(evt.target);
       var el = evt.target.ownerSVGElement;
-      if(el != null) el = el.parentNode;
       
+      
+      
+      if(el != null)
+      {
+        if(el.id  == "svg2")
+          el = evt.target;
+        else 
+          el = el.parentNode;
+      }
         
       
       
-      console.log(el);
+      // console.log(el);
   
   
       // var svg = el.parentElement; //document.querySelector('svg');
@@ -201,6 +209,24 @@
      
      
      
+     //////////// Midpoint 
+     // http://stackoverflow.com/questions/26867641/how-to-get-mid-point-of-g-tag-in-svg-using-javascript
+     var  bbox = el.getBBox();
+     var  ctm = el.getCTM()
+
+    // Calculate the centre of the group
+    var cx = bbox.x + bbox.width/2;
+    var cy = bbox.y + bbox.height/2;
+
+    // Transform cx,cy by the group's transform
+    var pt = svg.createSVGPoint();
+    pt.x = cx;
+    pt.y = cy;
+    
+    
+    //////////// Midpoint 
+     
+     
      
      
     
@@ -209,9 +235,10 @@
       var tra = el.getAttribute("transform");
       if(tra === null)
         tra="";
-      console.log(tra);
+      // console.log(tra);
     
-      el.setAttributeNS(null, "transform", tra + " rotate(45 " + inObjectSpace.x + " " + inObjectSpace.y + ")");
+      // el.setAttributeNS(null, "transform", tra + " rotate(45 " + inObjectSpace.x + " " + inObjectSpace.y + ")"); // Um ClickPunkt
+      el.setAttributeNS(null, "transform", tra + " rotate(45 " + pt.x + " " + pt.y + ")"); // Um Mittelpunkt
     
         // el.setAttributeNS(null, "transform", "rotate(60 " + cp.x + " " + cp.y + ")");
         //el.setAttributeNS(null, "transform", "rotate(60 " + evt.x + " " + evt.clientY + ")");

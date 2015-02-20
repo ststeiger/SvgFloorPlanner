@@ -1,6 +1,4 @@
 ﻿
-
-
 http://www.codedread.com/blog/archives/2005/12/21/how-to-enable-dragging-in-svg/
 http://www.petercollingridge.co.uk/interactive-svg-components/draggable-svg-element
 
@@ -43,3 +41,4 @@ http://tutorials.jenkov.com/svg/svg-transformation.html
 
 
 
+https://technet.microsoft.com/en-us/magazine/gg299551.aspx
