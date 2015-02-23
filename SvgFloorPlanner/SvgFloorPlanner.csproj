@@ -60,6 +60,7 @@
     <Content Include="drag2.html" />
     <Content Include="images\yourfallback.jpg" />
     <Content Include="images\Zimmertyp1.svg" />
+    <Content Include="reference.txt" />
     <Content Include="InvalidFileName.txt" />
     <Content Include="plans\065-01.svg" />
     <Content Include="plans\070-0B.svg" />
