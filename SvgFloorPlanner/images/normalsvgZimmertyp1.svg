@@ -7,527 +7,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   onload="init()"
-   onmouseup="mouseUp(evt)"
-   onmousemove="mouseMove(evt)"
    width="1683"
    height="3642"
    viewBox="0 0 1683 3642"
-   id="svg2"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="Zimmertyp1.svg">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1137"
-     id="namedview1171"
-     showgrid="false"
-     inkscape:zoom="0.51839648"
-     inkscape:cx="896.34498"
-     inkscape:cy="3028.4867"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
-  <script
-     id="script3">
-
-  function lol()
-  {
-    alert(&quot;foo&quot;);
-  }
-
-
-
-    function inspect(obj) 
-    {
-        var str = new Array();
-        var element = null;
-        for(element in obj) { str[str.length] = element; }
-        str.sort();
-        alert(obj + &quot;:&quot; + str.join(' '));
-    }
-    
-    var draggingElement = null;
-    var nMouseOffsetX = 0;
-    var nMouseOffsetY = 0;
-    
-    function mouseDown(evt) 
-    { 
-        var target = evt.currentTarget;
-        draggingElement = target;
-
-        if(target) 
-        {
-            var p = document.documentElement.createSVGPoint();
-            p.x = evt.clientX;
-            p.y = evt.clientY;
-        
-            var m = getScreenCTM(document.documentElement);
-
-            p = p.matrixTransform(m.inverse());
-            nMouseOffsetX = p.x - parseInt(target.getAttribute(&quot;dragx&quot;));
-            nMouseOffsetY = p.y - parseInt(target.getAttribute(&quot;dragy&quot;));
-//            displayRawText(&quot;mouse offset=&quot; + nMouseOffsetX + &quot;,&quot; + nMouseOffsetY);
-        }
-    }
-    
-    function mouseUp(evt) 
-    { 
-        draggingElement = null;
-        nMouseOffsetX = 0;
-        nMouseOffsetY = 0;
-    }
-    
-    
-    function getRotateText(str)
-    {
-      if(str === null)
-        return &quot;&quot;;
-      
-      //var FN_ARGS = /(rotate\s*\(\s*[^\)]*\))/m;
-      var FN_ARGS = /(rotate\s*\(\s*[^\)]*\))/g;
-      argDecl = str.match(FN_ARGS);
-      if(argDecl === null)
-      return &quot;&quot;;
-      
-      // console.log(argDecl);
-      // return &quot; &quot; + argDecl[0] + &quot; &quot;;
-      return &quot; &quot; + argDecl.join(&quot; &quot;) + &quot; &quot;;
-    }
-    
-    
-    function mouseMove(evt) 
-    { 
-        var p = document.documentElement.createSVGPoint();
-        p.x = evt.clientX;
-        p.y = evt.clientY;
-        
-        var m = getScreenCTM(document.documentElement);
-
-        p = p.matrixTransform(m.inverse());
-        p.x -= nMouseOffsetX;
-        p.y -= nMouseOffsetY;
-        
-        if(draggingElement) 
-        {
-            draggingElement.setAttribute(&quot;dragx&quot;, p.x);
-            draggingElement.setAttribute(&quot;dragy&quot;, p.y);
-            var rot = getRotateText(draggingElement.getAttribute(&quot;transform&quot;));
-            draggingElement.setAttribute(&quot;transform&quot;, &quot;translate(&quot; + p.x + &quot;,&quot; + p.y + &quot;)&quot; + rot);
-        }
-        
-        displayCoords(p.x, p.y, &quot;(svg user)&quot;);
-//      displayRawText(&quot;mouse offset=&quot; + nMouseOffsetX + &quot;,&quot; + nMouseOffsetY);
-    }
-    
-    function displayCoords(x,y,extra) 
-    {
-        var xNode = document.getElementById(&quot;xpos&quot;);
-        var yNode = document.getElementById(&quot;ypos&quot;);
-        if(xNode &amp;&amp; yNode) 
-        {
-            xNode.firstChild.nodeValue = parseInt(x) + extra;
-            yNode.firstChild.nodeValue = parseInt(y) + extra;
-        }
-    }
-    
-    function displayRawText(text) 
-    {
-        var textNode = document.getElementById(&quot;raw&quot;);
-        if(textNode) 
-        {
-            textNode.firstChild.nodeValue = text;
-        }
-    }
-    
-    
-    
-    function findFirstGroupParent(el)
-    {
-      if(el == null)
-        return null;
-        
-        /*
-        while(el.tagName !== &quot;svg&quot;)
-        {
-          // console.log(el);
-          if(el == null)
-            break;
-          
-          el = el.parentElement;
-        }
-        */
-        
-        el = el.ownerSVGElement;
-        
-        // if(el != null) return el.parentElement;
-        if(el != null) return el.parentNode;
-        
-        return null;
-    }
-    
-    
-    function initElement(ele) {
-      var el = document.getElementById(ele);
-      if(el)
-        el.addEventListener(&quot;mousedown&quot;, mouseDown, false);
-      else
-        alert(&quot;initElement: NULL&quot;);
-        
-        
-        
-  function elementsFromPoint(x,y, until) 
-  {
-			// until || (until = document.body); // Stop traversing here
-			// if (until instanceof $) until = until[0];
-      
-      // http://stackoverflow.com/questions/1569775/how-do-i-find-the-dom-node-that-is-at-a-given-x-y-position-hit-test
-      if(!until)
-      {
-          until = document.elementFromPoint(x,y);
-          
-          while(until.ownerSVGElement)
-          {
-              until = until.ownerSVGElement;    
-          }
-      }
-
-      // console.log(until);
- 
- 
-      var j = 0;
- 
-			var elements = [], previousDisplay = [], current, i, d, computedStyle = window.getComputedStyle;
-			while ( (current = document.elementFromPoint(x,y)) &amp;&amp; current != null &amp;&amp; current !== until) 
-      {
-				elements.push(current);
-				previousDisplay.push(computedStyle ? computedStyle(current)[&quot;display&quot;] : current.currentStyle.display);
-				current.style.display = &quot;none&quot;; // Add display: none, to get to the underlying element
-        // ++j; if(j&gt; 10) break;
-			}
- 
-			i = previousDisplay.length;
-			while ((d = previousDisplay.pop()) != null &amp;&amp; i--) 
-      {
-				//elements.get(i).style.display = d; // Restore the previous display-value
-        elements[i].style.display = d; // Restore the previous display-value
-			}
-			return elements;
-		}
-        
-        
-        
-        
-    el.addEventListener('contextmenu', function(evt) 
-    {
-      evt.preventDefault();
-    	console.log(&quot;contextmenu&quot;);
-
-
-    
-
-
-      
-      // element.ownerDocument
-      // console.log(evt.target);
-      // console.log(evt.target.ownerDocument); // HTML, not SVG
-      // var d = p.ownerDocument; 
-      // var html = d.documentElement;
-      // console.log(evt.target.ownerDocument.defaultView); // no document.parent
-      // console.log(evt.target.ownerDocument.defaultView.parent.document);
-      // console.log(evt.target.ownerDocument.documentElement.innerHTML);
-      
-      //var el = findFirstGroupParent(evt.target);
-      var el = evt.target.ownerSVGElement;
-      
-      
-      
-      if(el != null)
-      {
-        if(el.id  == &quot;svg2&quot;)
-          el = evt.target;
-        else 
-          el = el.parentNode;
-      }
-        
-        
-        console.log(elementsFromPoint(evt.clientX, evt.clientY));
-        
-        
-        el.parentNode.removeChild(el);
-      return;
-      
-      // console.log(el);
-  
-  
-      // var svg = el.parentElement; //document.querySelector('svg');
-      var svg = el.ownerSVGElement; //document.querySelector('svg');
-      
-      /*
-      // http://stackoverflow.com/questions/4850821/svg-coordinates-with-transform-matrix
-      // http://stackoverflow.com/questions/10298658/mouse-position-inside-autoscaled-svg
-      
-
-      // Create an SVGPoint for future math
-      var pt = svg.createSVGPoint();
-
-      // Get point in global SVG space
-      function cursorPoint(evt){
-        pt.x = evt.clientX; pt.y = evt.clientY;
-        return pt.matrixTransform(svg.getScreenCTM().inverse());
-      }
-      
-      var cp = cursorPoint(evt);
-      console.log(cp);
-      */
-      
-      var pt = svg.createSVGPoint();
-      pt.x = evt.clientX;
-      pt.y = evt.clientY;
-      var globalPoint = pt.matrixTransform(svg.getScreenCTM().inverse());
-     
-     
-      var globalToLocal = el.getTransformToElement(svg).inverse();
-      var inObjectSpace = globalPoint.matrixTransform( globalToLocal );
-     
-     
-     
-     //////////// Midpoint 
-     // http://stackoverflow.com/questions/26867641/how-to-get-mid-point-of-g-tag-in-svg-using-javascript
-     var  bbox = el.getBBox();
-     var  ctm = el.getCTM()
-
-    // Calculate the centre of the group
-    var cx = bbox.x + bbox.width/2;
-    var cy = bbox.y + bbox.height/2;
-
-    // Transform cx,cy by the group's transform
-    var pt = svg.createSVGPoint();
-    pt.x = cx;
-    pt.y = cy;
-    
-    
-    //////////// Midpoint 
-     
-     
-     
-     
-    
-    if(el != null)
-    {
-      var tra = el.getAttribute(&quot;transform&quot;);
-      if(tra === null)
-        tra=&quot;&quot;;
-      // console.log(tra);
-    
-      // el.setAttributeNS(null, &quot;transform&quot;, tra + &quot; rotate(45 &quot; + inObjectSpace.x + &quot; &quot; + inObjectSpace.y + &quot;)&quot;); // Um ClickPunkt
-      el.setAttributeNS(null, &quot;transform&quot;, tra + &quot; rotate(45 &quot; + pt.x + &quot; &quot; + pt.y + &quot;)&quot;); // Um Mittelpunkt
-    
-        // el.setAttributeNS(null, &quot;transform&quot;, &quot;rotate(60 &quot; + cp.x + &quot; &quot; + cp.y + &quot;)&quot;);
-        //el.setAttributeNS(null, &quot;transform&quot;, &quot;rotate(60 &quot; + evt.x + &quot; &quot; + evt.clientY + &quot;)&quot;);
-        // el.setAttributeNS(null, &quot;transform&quot;, &quot;rotate(60 &quot; + globalPoint.x + &quot; &quot; + globalPoint.y + &quot;)&quot;);
-        // draggingElement.setAttribute(&quot;transform&quot;, &quot;translate(&quot; + p.x + &quot;,&quot; + p.y + &quot;)&quot;);    
-    }
-
-
-
-
-
-/*
-      
-      
-      
-
-        
-        
-        // displayCoords(p.x, p.y, &quot;(svg user)&quot;);
-      */
-      
-      
-      
-      
-      
-      
-      return false;
-      
-      
-      
-      // myChair.setAttributeNS(null, &quot;transform&quot;, &quot;rotate(60 50 50)&quot;);
-      
-    }, false);
-        
-    }
-    
-    
-    function init() {
-      // window.parent.notify('The SVG says &quot;hello&quot;');
-    
-      initElement(&quot;ball&quot;);
-      initElement(&quot;square&quot;);
-      return;
-    
-    
-        var ball = document.getElementById(&quot;ball&quot;);
-        var square = document.getElementById(&quot;square&quot;);
-        // var logo = document.getElementById(&quot;cd_logo&quot;);
-        // var feed = document.getElementById(&quot;feed_icon&quot;);
-        
-        var logo = &quot;lol&quot;;
-        var feed = &quot;lol&quot;;
-        
-        if(ball &amp;&amp; square &amp;&amp; logo &amp;&amp; feed) 
-        {
-            ball.addEventListener(&quot;mousedown&quot;, mouseDown, false);
-            square.addEventListener(&quot;mousedown&quot;, mouseDown, false);
-            // logo.addEventListener(&quot;mousedown&quot;, mouseDown, false);
-            // feed.addEventListener(&quot;mousedown&quot;, mouseDown, false);
-        }
-        displayRawText(&quot;Drag stuff around&quot;);
-    }
-    
-    function displayMatrix(matrix) 
-    {
-        displayRawText(matrix.a + &quot;, &quot; + matrix.b + &quot;, &quot; + matrix.c + &quot;, &quot;
-                        + matrix.d + &quot;, &quot; + matrix.e + &quot;, &quot; + matrix.f);
-    }
-    
-    // Following is from Holger Will since ASV3 and O9 do not support getScreenTCM()
-    // See http://groups.yahoo.com/group/svg-developers/message/50789
-    function getScreenCTM(doc)
-    {
-        if(doc.getScreenCTM) 
-        { 
-            return doc.getScreenCTM(); 
-        }
-        
-        var root=doc
-        var sCTM= root.createSVGMatrix()
-
-        var tr= root.createSVGMatrix()
-        var par=root.getAttribute(&quot;preserveAspectRatio&quot;)
-        if (par==null || par==&quot;&quot;) 
-          par=&quot;xMidYMid meet&quot;//setting to default value
-          
-        parX=par.substring(0,4) //xMin;xMid;xMax
-        parY=par.substring(4,8)//YMin;YMid;YMax;
-        ma=par.split(&quot; &quot;)
-        mos=ma[1] //meet;slice
-
-        //get dimensions of the viewport
-        sCTM.a= 1
-        sCTM.d=1
-        sCTM.e= 0
-        sCTM.f=0
-
-
-        w=root.getAttribute(&quot;width&quot;)
-        if (w==null || w==&quot;&quot;) 
-          w=innerWidth
-
-        h=root.getAttribute(&quot;height&quot;)
-        if (h==null || h==&quot;&quot;) 
-          h=innerHeight
-
-        // Jeff Schiller:  Modified to account for percentages - I'm not 
-        // absolutely certain this is correct but it works for 100%/100%
-        if(w.substr(w.length-1, 1) == &quot;%&quot;) 
-        {
-            w = (parseFloat(w.substr(0,w.length-1)) / 100.0) * innerWidth;
-        }
-        
-        if(h.substr(h.length-1, 1) == &quot;%&quot;) 
-        {
-            h = (parseFloat(h.substr(0,h.length-1)) / 100.0) * innerHeight;
-        }
-
-        // get the ViewBox
-        vba=root.getAttribute(&quot;viewBox&quot;)
-        if(vba==null) vba=&quot;0 0 &quot;+w+&quot; &quot;+h
-        var vb=vba.split(&quot; &quot;)//get the viewBox into an array
-
-        //--------------------------------------------------------------------------
-        //create a matrix with current user transformation
-        tr.a= root.currentScale
-        tr.d=root.currentScale
-        tr.e= root.currentTranslate.x
-        tr.f=root.currentTranslate.y
-
-
-        //scale factors
-        sx=w/vb[2]
-        sy=h/vb[3]
-
-
-        //meetOrSlice
-        if(mos==&quot;slice&quot;)
-        {
-            s=(sx&gt;sy ? sx:sy)
-        }
-        else
-        {
-            s=(sx&lt;sy ? sx:sy)
-        }
-        
-        //preserveAspectRatio=&quot;none&quot;
-        if (par==&quot;none&quot;)
-        {
-            sCTM.a=sx//scaleX
-            sCTM.d=sy//scaleY
-            sCTM.e=- vb[0]*sx //translateX
-            sCTM.f=- vb[0]*sy //translateY
-            sCTM=tr.multiply(sCTM)//taking user transformations into acount
-
-            return sCTM
-        }
-
-
-        sCTM.a=s //scaleX
-        sCTM.d=s//scaleY
-        //-------------------------------------------------------
-        switch(parX)
-        {
-            case &quot;xMid&quot;:
-              sCTM.e=((w-vb[2]*s)/2) - vb[0]*s //translateX
-              break;
-            case &quot;xMin&quot;:
-              sCTM.e=- vb[0]*s//translateX
-              break;
-            case &quot;xMax&quot;:
-              sCTM.e=(w-vb[2]*s)- vb[0]*s //translateX
-              break;
-        }
-        
-        //------------------------------------------------------------
-        switch(parY)
-        {
-          case &quot;YMid&quot;:
-            sCTM.f=(h-vb[3]*s)/2 - vb[1]*s //translateY
-            break;
-          case &quot;YMin&quot;:
-            sCTM.f=- vb[1]*s//translateY
-            break;
-          case &quot;YMax&quot;:
-            sCTM.f=(h-vb[3]*s) - vb[1]*s //translateY
-            break;
-        }
-        
-        sCTM=tr.multiply(sCTM)//taking user transformations into acount
-        
-        return sCTM
-    }
-    
-</script>
+   id="svg2">
   <defs
      id="defs4">
     <clipPath
@@ -578,18 +62,16 @@
          d="m 161,0 19269,0 0,27243 -19269,0 L 161,0"
          id="path3003" />
     </clipPath>
-    <!--
-    http://stackoverflow.com/questions/9391945/outline-a-group-of-touching-shapes-with-svg
-    -->
     <filter
+       color-interpolation-filters="sRGB"
        id="biggerbwcopy">
       <feColorMatrix
-         values="0 0 0 0 0                              0 0 0 0 0                              0 0 0 0 0                              0 0 0 1 0"
-         id="feColorMatrix23" />
+         id="feColorMatrix23"
+         values="0 0 0 0 0                              0 0 0 0 0                              0 0 0 0 0                              0 0 0 1 0" />
       <feMorphology
-         operator="dilate"
+         id="feMorphology25"
          radius="2"
-         id="feMorphology25" />
+         operator="dilate" />
     </filter>
   </defs>
   <metadata
@@ -600,63 +82,53 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <circle
      cx="500"
-     id="ball"
-     fill="green"
+     cy="0"
      r="200"
      transform="translate(400,300)"
-     dragx="400"
-     dragy="300" />
+     id="ball"
+     style="fill:#008000" />
   <g
-     id="square"
      transform="translate(1000,1000)"
-     dragx="1000"
-     dragy="1000">
+     id="square">
     <rect
-       x="0"
-       y="0"
        width="300"
        height="300"
-       fill="red"
-       stroke="black"
-       stroke-width="10"
-       id="rect30" />
+       x="0"
+       y="0"
+       id="rect30"
+       style="fill:#ff0000;stroke:#000000;stroke-width:10" />
   </g>
   <text
      x="1359.5636"
      y="161.41949"
-     font-size="100"
      id="text32"
      style="font-size:100px;fill:#dc143c">X:</text>
   <text
-     id="xpos"
      x="1559.5636"
      y="161.41949"
-     font-size="100"
+     id="xpos"
      style="font-size:100px;fill:#dc143c">0</text>
   <text
      x="1359.5636"
      y="281.41949"
-     font-size="100"
      id="text35"
      style="font-size:100px;fill:#dc143c">Y:</text>
   <text
-     id="ypos"
      x="1559.5636"
      y="281.41949"
-     font-size="100"
+     id="ypos"
      style="font-size:100px;fill:#dc143c">0</text>
   <text
-     id="raw"
      x="20"
      y="50"
-     font-size="60"
-     fill="blue" />
+     id="raw"
+     style="font-size:60px;fill:#0000ff" />
   <path
      d="m 3.375,2950.725 98.31225,0 363.4574,166.35 114.16564,495.45 1052.06871,0"
      id="path3087"
@@ -936,7 +408,7 @@
   <path
      d="m 870.825,898.42496 41.4,0 0,-281.25"
      id="path3453"
-     style="fill:none;stroke:#000000;stroke-width:0.15000000999999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+     style="fill:none;stroke:#000000;stroke-width:0.15000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
   <path
      d="m 870.825,256.42496 0,301.05 14.1,0 0,59.7 27.3,0 0,-360.75"
      id="path3455"
@@ -2440,7 +1912,7 @@
   <path
      d="m 190.725,2642.925 -33.15,0 0,22.05 29.7,0 50.1,16.35 6.9,-21.15 -53.55,-17.25"
      id="path4883"
-     style="fill:none;stroke:#030100;stroke-width:0.44999999000000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+     style="fill:none;stroke:#030100;stroke-width:0.44999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
   <path
      d="m 1102.125,2808.375 0,22.2 391.8,0 0,-22.2 -391.8,0"
      id="path5307"
@@ -4672,7 +4144,7 @@
   <path
      d="m 291.975,2642.925 2.1,0"
      id="path7375"
-     style="fill:none;stroke:#030100;stroke-width:0.15000000999999999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
+     style="fill:none;stroke:#030100;stroke-width:0.15000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none" />
   <path
      d="m 291.975,971.47496 2.1,0"
      id="path7377"
