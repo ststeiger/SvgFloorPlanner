@@ -1,0 +1,103 @@
+﻿
+-- https://msdn.microsoft.com/en-us/library/windows/desktop/dd323692(v=vs.85).aspx
+-- http://www.viksoe.dk/code/tarfolder.htm
+-- http://www.viksoe.dk/code/regfolder.htm
+-- http://www.viksoe.dk/code/tarfolder.htm
+-- http://www.strathweb.com/2014/12/razor-views-pre-compilation-asp-net-5-mvc-6/
+-- http://www.asp.net/vnext/overview/aspnet-vnext/vc
+-- http://channel9.msdn.com/Events/dotnetConf/2014/MVC-6
+-- http://stephenhaunts.com/2014/07/29/asp-net-mvc-6-vnext/
+-- http://stackoverflow.com/questions/24533380/what-are-the-asp-net-mvc-6-features
+
+
+
+
+
+
+http://linuxcommand.org/lts0070.php
+
+
+http://www.perlfect.com/articles/chmod.shtml
+http://mason.gmu.edu/~montecin/UNIXpermiss.htm
+http://www.linux.com/learn/tutorials/309527-understanding-linux-file-permissions
+http://www.tutorialspoint.com/unix/unix-file-permission.htm
+https://kb.iu.edu/d/abdb
+
+
+
+chmod - modify file access rights
+•su - temporarily become the superuser
+•chown - change file ownership
+•chgrp - change a file's group ownership
+
+
+
+
+
+A UNIX string of information, showing permissions for a directory: 
+
+
+[The initial dash ("-") in the first permissions string 
+indicates the entry is a file. 
+The letter "d" instead of a ("-") in the 2nd example 
+indicates the entry is a directory.]
+
+
+
+dr-xr-xr-x
+-r--r--r--
+
+
+
+d-directory
+r-read - 4
+w-write - 2 
+x-execute -1
+- nothing - 0
+
+d r-x r-x r-x
+
+
+
+The first three positions (after the "-" or "d") 
+designate owner's permissions. 
+
+
+The second three positions  
+designate permissions for the group
+
+
+
+The last three positions are for the world/anyone. 
+To allow your Web pages to be viewed using a browser, 
+you need this permission set to "read." 
+
+
+
+drwxr-xr-x 7 username 229 16384 Dec 13 08:05 public_html 
+
+
+
+
+Advanced Permissions
+
+The special permissions flag can be marked with any of the following: 
+_ - no special permissions
+d - directory
+l - The file or directory is a symbolic link
+s - This indicated the setuid/setgid permissions. This is not set displayed in the special permission part of the permissions display, but is represented as a s in the read portion of the owner or group permissions.
+t - This indicates the sticky bit permissions. This is not set displayed in the special permission part of the permissions display, but is represented as a t in the executable portion of the all users permissions
+
+
+
+http://stackoverflow.com/questions/7331651/find-the-owner-of-a-file-in-unix
+
+Use the stat command, if available on your version of UNIX:
+    $ stat -c "%U %G" /etc/passwd
+    root root
+ 
+
+http://www.cyberciti.biz/faq/understanding-etcgroup-file/
+
+
+
