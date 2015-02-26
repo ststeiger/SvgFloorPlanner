@@ -60,7 +60,6 @@
     <Content Include="drag2.html" />
     <Content Include="images\yourfallback.jpg" />
     <Content Include="images\Zimmertyp1.svg" />
-    <Content Include="fs.sql" />
     <Content Include="unix_perm.txt" />
     <Content Include="reference.txt" />
     <Content Include="InvalidFileName.txt" />
